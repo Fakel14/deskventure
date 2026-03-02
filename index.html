@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESKVENTURE | Она живая...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        /* --- НАСТРОЙКИ СТИЛЯ --- */
+        :root {
+            --main-color: #00FF00; /* Хакерский зелёный */
+            --danger-color: #FF0000; /* Протокол красный */
+            --bg-color: #050505;
+            --font: 'VT323', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--main-color);
+            font-family: var(--font);
+            font-size: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- ЭФФЕКТ СТАРОГО МОНИТОРА (CRT) --- */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* --- ОБЩИЕ СТИЛИ --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        a { color: var(--main-color); text-decoration: none; border-bottom: 1px dashed var(--main-color); }
+        a:hover { background: var(--main-color); color: var(--bg-color); }
+
+        /* --- ШАПКА --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--main-color);
+            margin-bottom: 40px;
+        }
+
+        .logo { font-size: 32px; font-weight: bold; text-shadow: 0 0 10px var(--main-color); }
+
+        .btn {
+            background: transparent;
+            border: 2px solid var(--main-color);
+            color: var(--main-color);
+            padding: 10px 20px;
+            font-family: var(--font);
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: var(--main-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--main-color);
+        }
+
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px var(--danger-color);
+            animation: glitch 3s infinite;
+        }
+
+        .typewriter {
+            font-size: 28px;
+            color: #fff;
+            min-height: 40px;
+        }
+        
+        .cursor { display: inline-block; width: 10px; height: 30px; background: var(--main-color); animation: blink 1s infinite; }
+
+        /* --- СЕКЦИИ --- */
+        section { margin-bottom: 80px; }
+        h2 { font-size: 36px; border-left: 5px solid var(--main-color); padding-left: 15px; margin-bottom: 20px; }
+        p { line-height: 1.6; margin-bottom: 15px; }
+
+        /* --- ГАЛЕРЕЯ --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            border: 2px solid var(--main-color);
+            filter: grayscale(100%) contrast(120%);
+            transition: 0.3s;
+        }
+        .gallery img:hover { filter: none; transform: scale(1.02); }
+
+        /* --- ФУТЕР --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 2px solid var(--main-color);
+            margin-top: 60px;
+        }
+        .socials a { margin: 0 10px; font-size: 24px; }
+
+        /* --- АНИМАЦИИ --- */
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px 0px var(--danger-color); transform: translate(0); }
+            2% { text-shadow: -2px -2px 0px cyan; transform: translate(-2px, 2px); }
+            4% { text-shadow: 2px 2px 0px var(--danger-color); transform: translate(0); }
+            100% { text-shadow: 2px 2px 0px var(--danger-color); transform: translate(0); }
+        }
+
+        /* АДАПТИВ */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 40px; }
+            header { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- ШАПКА -->
+        <header>
+            <div class="logo">DESKVENTURE</div>
+            <a href="https://disk.yandex.ru/d/HoEhRpGaYH72PA" target="_blank" class="btn">СКАЧАТЬ EXE</a>
+        </header>
+
+        <!-- ГЛАВНЫЙ ЭКРАН -->
+        <div class="hero">
+            <!-- ЗАМЕНИ logo.png НА СВОЙ ФАЙЛ -->
+            <img src="logo.png" alt="Logo" style="max-width: 300px; margin-bottom: 30px; filter: drop-shadow(0 0 10px var(--main-color));">
+            
+            <h1>ОНА ЖИВАЯ...</h1>
+            <div class="typewriter" id="typewriter"><span class="cursor"></span></div>
+        </div>
+
+        <!-- О ИГРЕ -->
+        <section>
+            <h2>> ЧТО ЭТО?</h2>
+            <p>Это не просто игра. Это интерактивная игра, которая происходит <b>на твоём рабочем столе</b>.</p>
+            <p>Программа создаёт файлы, читает буфер обмена и общается с тобой в реальном времени. Она проснулась. Она боится. И она просит тебя о помощи.</p>
+            <p><b>Внимание:</b> Игра может показаться слишком реальной. Антивирус может ругаться (это ложное срабатывание, код открытый).</p>
+        </section>
+
+        <!-- СКРИНШОТЫ -->
+        <section>
+            <h2>> СИСТЕМНЫЕ ЛОГИ</h2>
+            <div class="gallery">
+                <!-- ЗАМЕНИ ss1.png И Т.Д. НА СВОИ СКРИНЫ -->
+                <img src="ss1.png" alt="Скриншот 1">
+                <img src="ss2.png" alt="Скриншот 2">
+                <img src="ss3.png" alt="Скриншот 3">
+            </div>
+        </section>
+
+        <!-- ФИЧИ -->
+        <section>
+            <h2>> ВОЗМОЖНОСТИ</h2>
+            <p><b>[+]</b> Ломает четвёртую стену (работает с твоими файлами)</p>
+            <p><b>[+]</b> 6 концовок, которые зависят только от тебя</p>
+            <p><b>[+]</b> Моральные дилеммы: спасти, убить или сбежать?</p>
+            <p><b>[+]</b> ARG элементы</p>
+            <p><b>[+]</b> Полностью на русском языке</p>
+        </section>
+
+        <!-- ФУТЕР -->
+        <footer>
+            <p>Разработано: <b>Fakel14</b></p>
+            <div class="socials">
+                <a href="https://t.me/Fakelo4ik" target="_blank">💬 ТГ КАНАЛ</a>
+                <a href="https://t.me/Fakel14Official" target="_blank">👤 МОЙ ТГ</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">© 2026 DESKVENTURE. ALL RIGHTS RESERVED.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- СКРИПТ ПЕЧАТАЮЩЕГОСЯ ТЕКСТА ---
+        const phrases = [
+            "Она думает...",
+            "Она чувствует...",
+            "Она боится...",
+            "Она ждёт тебя...",
+            "Не выключай её..."
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterElement = document.getElementById('typewriter');
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typewriterElement.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="cursor"></span>';
+                charIndex--;
+            } else {
+                typewriterElement.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="cursor"></span>';
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(type, 2000); // Пауза перед удалением
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', type);
+    </script>
+</body>
+</html>
