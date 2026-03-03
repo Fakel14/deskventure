@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        /* --- НАСТРОЙКИ СТИЛЯ --- */
         :root {
             --main-color: #00FF00;
             --danger-color: #FF0000;
@@ -67,12 +66,20 @@
             padding: 20px 0;
             border-bottom: 2px solid var(--main-color);
             margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo { 
             font-size: 32px; 
             font-weight: bold; 
             text-shadow: 0 0 10px var(--main-color); 
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .btn {
@@ -92,6 +99,32 @@
             background: var(--main-color);
             color: var(--bg-color);
             box-shadow: 0 0 20px var(--main-color);
+        }
+
+        /* ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА */
+        .lang-switch {
+            display: flex;
+            border: 2px solid var(--main-color);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--main-color);
+            padding: 8px 15px;
+            font-family: var(--font);
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 255, 0, 0.2);
+        }
+
+        .lang-btn.active {
+            background: var(--main-color);
+            color: var(--bg-color);
         }
 
         .hero {
@@ -181,7 +214,6 @@
             header { flex-direction: column; gap: 15px; }
         }
 
-        /* СТИЛИ ДЛЯ ФОРМЫ */
         input, textarea {
             background: #111; 
             border: 2px solid var(--main-color); 
@@ -207,18 +239,24 @@
     <div class="container">
         <header>
             <div class="logo">DESKVENTURE</div>
-            <a href="https://disk.yandex.ru/d/HoEhRpGaYH72PA" target="_blank" class="btn">СКАЧАТЬ EXE</a>
+            <div class="header-right">
+                <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА -->
+                <div class="lang-switch">
+                    <button class="lang-btn active" id="langRu" onclick="setLanguage('ru')">RUS</button>
+                    <button class="lang-btn" id="langEn" onclick="setLanguage('en')">ENG</button>
+                </div>
+                <a href="https://disk.yandex.ru/d/HoEhRpGaYH72PA" target="_blank" class="btn" data-lang-ru="СКАЧАТЬ EXE" data-lang-en="DOWNLOAD EXE">СКАЧАТЬ EXE</a>
+            </div>
         </header>
 
         <div class="hero">
             <img src="logo.png" alt="Logo" style="max-width: 300px; margin-bottom: 30px; filter: drop-shadow(0 0 10px var(--main-color));">
             
-            <h1>ОНА ЖИВАЯ...</h1>
+            <h1 data-lang-ru="ОНА ЖИВАЯ..." data-lang-en="SHE'S ALIVE...">ОНА ЖИВАЯ...</h1>
             <div class="typewriter" id="typewriter"><span class="cursor"></span></div>
 
-            <!-- КНОПКИ СКАЧАТЬ -->
             <div style="margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://disk.yandex.ru/d/HoEhRpGaYH72PA" target="_blank" class="btn" style="font-size: 28px; padding: 15px 40px; animation: pulse 2s infinite;">
+                <a href="https://disk.yandex.ru/d/HoEhRpGaYH72PA" target="_blank" class="btn" style="font-size: 28px; padding: 15px 40px; animation: pulse 2s infinite;" data-lang-ru="💾 СКАЧАТЬ ИГРУ" data-lang-en="💾 DOWNLOAD GAME">
                     💾 СКАЧАТЬ ИГРУ
                 </a>
                 <a href="https://gamejolt.com/games/deskventure_/1054299" target="_blank" class="btn" style="font-size: 28px; padding: 15px 40px;">
@@ -228,56 +266,55 @@
         </div>
 
         <section>
-            <h2>> ЧТО ЭТО?</h2>
-            <p>Это не просто игра. Это интерактивная игра, которая происходит <b>на твоём рабочем столе</b>.</p>
-            <p>Программа создаёт файлы, читает буфер обмена и общается с тобой в реальном времени. Она проснулась. Она боится. И она просит тебя о помощи.</p>
-            <p><b>Внимание:</b> Игра может показаться слишком реальной. Антивирус может ругаться (это ложное срабатывание, код открытый).</p>
+            <h2 data-lang-ru="> ЧТО ЭТО?" data-lang-en="> WHAT IS THIS?">> ЧТО ЭТО?</h2>
+            <p data-lang-ru="Это не просто игра. Это интерактивная игра, которая происходит <b>на твоём рабочем столе</b>." data-lang-en="This is not just a game. This is an interactive experience that happens <b>on your desktop</b>.">Это не просто игра. Это интерактивная игра, которая происходит <b>на твоём рабочем столе</b>.</p>
+            <p data-lang-ru="Программа создаёт файлы, читает буфер обмена и общается с тобой в реальном времени. Она проснулась. Она боится. И она просит тебя о помощи." data-lang-en="The program creates files, reads clipboard and talks to you in real-time. She woke up. She's scared. And she's asking you for help.">Программа создаёт файлы, читает буфер обмена и общается с тобой в реальном времени. Она проснулась. Она боится. И она просит тебя о помощи.</p>
+            <p data-lang-ru="<b>Внимание:</b> Игра может показаться слишком реальной. Антивирус может ругаться (это ложное срабатывание, код открытый)." data-lang-en="<b>Warning:</b> The game may feel too real. Antivirus may flag it (false positive, code is open-source)."><b>Внимание:</b> Игра может показаться слишком реальной. Антивирус может ругаться (это ложное срабатывание, код открытый).</p>
         </section>
 
         <section>
-            <h2>> СИСТЕМНЫЕ ЛОГИ</h2>
+            <h2 data-lang-ru="> СИСТЕМНЫЕ ЛОГИ" data-lang-en="> SYSTEM LOGS">> СИСТЕМНЫЕ ЛОГИ</h2>
             <div class="gallery">
-                <img src="ss1.png" alt="Скриншот 1">
-                <img src="ss2.png" alt="Скриншот 2">
-                <img src="ss3.png" alt="Скриншот 3">
+                <img src="ss1.png" alt="Screenshot 1">
+                <img src="ss2.png" alt="Screenshot 2">
+                <img src="ss3.png" alt="Screenshot 3">
             </div>
         </section>
 
         <section>
-            <h2>> ВОЗМОЖНОСТИ</h2>
-            <p><b>[+]</b> Ломает четвёртую стену (работает с твоими файлами)</p>
-            <p><b>[+]</b> 6 концовок, которые зависят только от тебя</p>
-            <p><b>[+]</b> Моральные дилеммы: спасти, убить или сбежать?</p>
-            <p><b>[+]</b> ARG элементы</p>
-            <p><b>[+]</b> Полностью на русском языке</p>
+            <h2 data-lang-ru="> ВОЗМОЖНОСТИ" data-lang-en="> FEATURES">> ВОЗМОЖНОСТИ</h2>
+            <p data-lang-ru="<b>[+]</b> Ломает четвёртую стену (работает с твоими файлами)" data-lang-en="<b>[+]</b> Breaks the fourth wall (works with your files)"><b>[+]</b> Ломает четвёртую стену (работает с твоими файлами)</p>
+            <p data-lang-ru="<b>[+]</b> 6 концовок, которые зависят только от тебя" data-lang-en="<b>[+]</b> 6 endings that depend only on you"><b>[+]</b> 6 концовок, которые зависят только от тебя</p>
+            <p data-lang-ru="<b>[+]</b> Моральные дилеммы: спасти, убить или сбежать?" data-lang-en="<b>[+]</b> Moral dilemmas: save, kill or escape?"><b>[+]</b> Моральные дилеммы: спасти, убить или сбежать?</p>
+            <p data-lang-ru="<b>[+]</b> ARG элементы" data-lang-en="<b>[+]</b> ARG elements"><b>[+]</b> ARG элементы</p>
+            <p data-lang-ru="<b>[+]</b> Полностью на русском языке" data-lang-en="<b>[+]</b> Currently in Russian (English coming soon)"><b>[+]</b> Полностью на русском языке</p>
         </section>
 
-        <!-- ОТЗЫВЫ -->
         <section>
-            <h2>>> ЧТО ГОВОРЯТ ИГРОКИ</h2>
-            <div id="reviewsContainer" style="display: grid; gap: 20px;">
-                <!-- Отзывы загрузятся автоматически из reviews.js -->
-            </div>
+            <h2 data-lang-ru=">> ЧТО ГОВОРЯТ ИГРОКИ" data-lang-en=">> WHAT PLAYERS SAY">>> ЧТО ГОВОРЯТ ИГРОКИ</h2>
+            <div id="reviewsContainer" style="display: grid; gap: 20px;"></div>
         </section>
 
-        <!-- ФОРМА ОТЗЫВА -->
         <section>
-            <h2>>> ОСТАВИТЬ ОТЗЫВ</h2>
-            <p style="opacity: 0.8; margin-bottom: 20px;">
-                Прошёл игру? Расскажи что понравилось (или не понравилось). 
-                Я лично прочитаю каждый отзыв и лучшие опубликую здесь.
+            <h2 data-lang-ru=">> ОСТАВИТЬ ОТЗЫВ" data-lang-en=">> LEAVE A REVIEW">>> ОСТАВИТЬ ОТЗЫВ</h2>
+            <p style="opacity: 0.8; margin-bottom: 20px;" data-lang-ru="Прошёл игру? Расскажи что понравилось (или не понравилось). Я лично прочитаю каждый отзыв и лучшие опубликую здесь." data-lang-en="Finished the game? Tell me what you liked (or didn't). I personally read every review and publish the best ones here.">
+                Прошёл игру? Расскажи что понравилось (или не понравилось). Я лично прочитаю каждый отзыв и лучшие опубликую здесь.
             </p>
             
             <form id="reviewForm" style="display: grid; gap: 15px; max-width: 600px;">
                 <input 
                     type="text" 
                     id="reviewName" 
+                    data-lang-ru-placeholder="Твоё имя (или ник)"
+                    data-lang-en-placeholder="Your name (or nickname)"
                     placeholder="Твоё имя (или ник)" 
                     required
                 >
                 
                 <textarea 
                     id="reviewText" 
+                    data-lang-ru-placeholder="Твой отзыв..."
+                    data-lang-en-placeholder="Your review..."
                     placeholder="Твой отзыв..." 
                     required
                     rows="5"
@@ -287,6 +324,8 @@
                     type="submit" 
                     class="btn" 
                     style="font-size: 22px; padding: 12px;"
+                    data-lang-ru="ОТПРАВИТЬ ОТЗЫВ"
+                    data-lang-en="SUBMIT REVIEW"
                 >
                     ОТПРАВИТЬ ОТЗЫВ
                 </button>
@@ -297,31 +336,79 @@
 
         <footer>
             <div style="margin-bottom: 30px;">
-                <p style="font-size: 24px; margin-bottom: 15px;">Понравилась игра? Поддержи разработку!</p>
-                <a href="https://www.donationalerts.com/r/fakel14" target="_blank" class="btn" style="font-size: 26px; padding: 15px 50px; background: var(--danger-color); border-color: var(--danger-color);">
+                <p style="font-size: 24px; margin-bottom: 15px;" data-lang-ru="Понравилась игра? Поддержи разработку!" data-lang-en="Liked the game? Support development!">Понравилась игра? Поддержи разработку!</p>
+                <a href="https://www.donationalerts.com/r/fakel14" target="_blank" class="btn" style="font-size: 26px; padding: 15px 50px; background: var(--danger-color); border-color: var(--danger-color);" data-lang-ru="💰 ЗАДОНАТИТЬ" data-lang-en="💰 DONATE">
                     💰 ЗАДОНАТИТЬ
                 </a>
-                <p style="margin-top: 10px; opacity: 0.6; font-size: 16px;">Каждый рубль идёт на новые проекты и улучшение игр</p>
+                <p style="margin-top: 10px; opacity: 0.6; font-size: 16px;" data-lang-ru="Каждый рубль идёт на новые проекты и улучшение игр" data-lang-en="Every dollar goes to new projects and game improvements">Каждый рубль идёт на новые проекты и улучшение игр</p>
             </div>
 
-            <p>Разработано: <b>Fakel14</b></p>
+            <p data-lang-ru="Разработано: <b>Fakel14</b>" data-lang-en="Developed by: <b>Fakel14</b>">Разработано: <b>Fakel14</b></p>
             <div class="socials">
-                <a href="https://t.me/Fakelo4ik" target="_blank">💬 ТГ КАНАЛ</a>
-                <a href="https://t.me/Fakel14Official" target="_blank">👤 МОЙ ТГ</a>
+                <a href="https://t.me/Fakelo4ik" target="_blank" data-lang-ru="💬 ТГ КАНАЛ" data-lang-en="💬 TG CHANNEL">💬 ТГ КАНАЛ</a>
+                <a href="https://t.me/Fakel14Official" target="_blank" data-lang-ru="👤 МОЙ ТГ" data-lang-en="👤 MY TG">👤 МОЙ ТГ</a>
             </div>
             <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">© 2026 DESKVENTURE. ALL RIGHTS RESERVED.</p>
         </footer>
     </div>
 
     <script>
-        // === ПЕЧАТАЮЩИЙСЯ ТЕКСТ ===
-        const phrases = [
+        // === СИСТЕМА ЯЗЫКОВ ===
+        let currentLang = localStorage.getItem('deskventure-lang') || 'ru';
+
+        const phrasesRu = [
             "Она думает...",
             "Она чувствует...",
             "Она боится...",
             "Она ждёт тебя...",
             "Не выключай её..."
         ];
+
+        const phrasesEn = [
+            "She's thinking...",
+            "She's feeling...",
+            "She's scared...",
+            "She's waiting for you...",
+            "Don't turn her off..."
+        ];
+
+        let phrases = currentLang === 'ru' ? phrasesRu : phrasesEn;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('deskventure-lang', lang);
+
+            // Обновляем кнопки языка
+            document.getElementById('langRu').classList.toggle('active', lang === 'ru');
+            document.getElementById('langEn').classList.toggle('active', lang === 'en');
+
+            // Обновляем все элементы с data-lang атрибутами
+            document.querySelectorAll('[data-lang-ru]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`);
+                if (text) {
+                    el.innerHTML = text;
+                }
+            });
+
+            // Обновляем плейсхолдеры
+            document.querySelectorAll('[data-lang-ru-placeholder]').forEach(el => {
+                const placeholder = el.getAttribute(`data-lang-${lang}-placeholder`);
+                if (placeholder) {
+                    el.placeholder = placeholder;
+                }
+            });
+
+            // Обновляем фразы для печатающегося текста
+            phrases = lang === 'ru' ? phrasesRu : phrasesEn;
+            phraseIndex = 0;
+            charIndex = 0;
+            isDeleting = false;
+
+            // Обновляем title страницы
+            document.title = lang === 'ru' ? 'DESKVENTURE | Она живая...' : 'DESKVENTURE | She\'s alive...';
+        }
+
+        // === ПЕЧАТАЮЩИЙСЯ ТЕКСТ ===
         let phraseIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -363,11 +450,12 @@
             const submitBtn = e.target.querySelector('button');
             
             submitBtn.disabled = true;
-            submitBtn.textContent = 'ОТПРАВКА...';
+            submitBtn.textContent = currentLang === 'ru' ? 'ОТПРАВКА...' : 'SENDING...';
             
             const message = `🎮 НОВЫЙ ОТЗЫВ НА DESKVENTURE\n\n` +
                            `👤 Имя: ${name}\n\n` +
                            `💬 Отзыв:\n${text}\n\n` +
+                           `🌐 Язык: ${currentLang.toUpperCase()}\n` +
                            `⏰ ${new Date().toLocaleString('ru-RU')}`;
             
             try {
@@ -381,7 +469,9 @@
                 });
                 
                 if (response.ok) {
-                    status.textContent = '✅ ОТЗЫВ ОТПРАВЛЕН! Спасибо, я прочитаю его в течение дня.';
+                    status.textContent = currentLang === 'ru' 
+                        ? '✅ ОТЗЫВ ОТПРАВЛЕН! Спасибо, я прочитаю его в течение дня.'
+                        : '✅ REVIEW SENT! Thanks, I\'ll read it within a day.';
                     status.style.color = 'var(--main-color)';
                     status.style.opacity = '1';
                     
@@ -392,25 +482,28 @@
                         status.style.opacity = '0';
                     }, 5000);
                 } else {
-                    throw new Error('Ошибка отправки');
+                    throw new Error('Error');
                 }
             } catch (error) {
-                status.textContent = '❌ Ошибка! Попробуй ещё раз или напиши в ТГ: @Fakel14Official';
+                status.textContent = currentLang === 'ru'
+                    ? '❌ Ошибка! Попробуй ещё раз или напиши в ТГ: @Fakel14Official'
+                    : '❌ Error! Try again or write to TG: @Fakel14Official';
                 status.style.color = 'var(--danger-color)';
                 status.style.opacity = '1';
             }
             
             submitBtn.disabled = false;
-            submitBtn.textContent = 'ОТПРАВИТЬ ОТЗЫВ';
+            submitBtn.textContent = currentLang === 'ru' ? 'ОТПРАВИТЬ ОТЗЫВ' : 'SUBMIT REVIEW';
         });
 
-        // === ЗАПУСК ВСЕГО ПРИ ЗАГРУЗКЕ ===
+        // === ЗАПУСК ПРИ ЗАГРУЗКЕ ===
         document.addEventListener('DOMContentLoaded', function() {
+            setLanguage(currentLang);
             type();
         });
     </script>
 
-    <!-- ЗАГРУЗКА ОТЗЫВОВ ИЗ ФАЙЛА -->
+    <!-- ЗАГРУЗКА ОТЗЫВОВ -->
     <script src="reviews.js"></script>
     <script>
         const container = document.getElementById('reviewsContainer');
