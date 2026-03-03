@@ -437,23 +437,66 @@
             }
         }
 
-        // === СИСТЕМА ОТЗЫВОВ ===
+        // === СИСТЕМА ОТЗЫВОВ С СЕКРЕТОМ ===
         const TELEGRAM_BOT_TOKEN = '8708232687:AAH5Taa0KgPWs2CT-cXReSE-r10LpFZa8GA';
         const TELEGRAM_CHAT_ID = 7019850371;
+
+        // СЕКРЕТНЫЕ ТРИГГЕРЫ
+        const SECRET_TRIGGERS = [
+            'система',
+            'system',
+            'аномалия',
+            'anomaly',
+            'протокол',
+            'protocol'
+        ];
 
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('reviewName').value;
+            const name = document.getElementById('reviewName').value.trim().toLowerCase();
             const text = document.getElementById('reviewText').value;
             const status = document.getElementById('reviewStatus');
             const submitBtn = e.target.querySelector('button');
             
+            // ПРОВЕРКА НА СЕКРЕТНЫЙ ТРИГГЕР
+            if (SECRET_TRIGGERS.includes(name)) {
+                // Уведомление тебе в ТГ
+                const secretMessage = `🔓 КТО-ТО НАШЁЛ СЕКРЕТНЫЙ ТЕРМИНАЛ!\n\n` +
+                                     `👤 Имя: ${document.getElementById('reviewName').value}\n` +
+                                     `💬 Текст: ${text}\n` +
+                                     `⏰ ${new Date().toLocaleString('ru-RU')}`;
+                
+                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: secretMessage
+                    })
+                });
+                
+                // Показываем сообщение
+                status.innerHTML = `
+                    <span class="glitch" style="color: #00FF00;">ДОСТУП РАЗРЕШЁН</span><br>
+                    <span style="font-size: 14px;">Перенаправление через 3 секунды...</span>
+                `;
+                status.style.opacity = '1';
+                
+                // Редирект на терминал через 3 секунды
+                setTimeout(() => {
+                    window.location.href = 'https://fakel14.github.io/dvsecret/';
+                }, 3000);
+                
+                return;
+            }
+            
+            // ОБЫЧНАЯ ОТПРАВКА ОТЗЫВА
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === 'ru' ? 'ОТПРАВКА...' : 'SENDING...';
             
             const message = `🎮 НОВЫЙ ОТЗЫВ НА DESKVENTURE\n\n` +
-                           `👤 Имя: ${name}\n\n` +
+                           `👤 Имя: ${document.getElementById('reviewName').value}\n\n` +
                            `💬 Отзыв:\n${text}\n\n` +
                            `🌐 Язык: ${currentLang.toUpperCase()}\n` +
                            `⏰ ${new Date().toLocaleString('ru-RU')}`;
