@@ -110,6 +110,7 @@
             font-size: 28px;
             color: #fff;
             min-height: 40px;
+            margin-bottom: 20px;
         }
         
         .cursor { 
@@ -251,7 +252,6 @@
             <p><b>[+]</b> Полностью на русском языке</p>
         </section>
 
-
         <!-- ОТЗЫВЫ -->
         <section>
             <h2>>> ЧТО ГОВОРЯТ ИГРОКИ</h2>
@@ -295,22 +295,23 @@
             </form>
         </section>
 
-<footer>
-    <div style="margin-bottom: 30px;">
-        <p style="font-size: 24px; margin-bottom: 15px;">Понравилась игра? Поддержи разработку!</p>
-        <a href="https://www.donationalerts.com/r/fakelo4ik" target="_blank" class="btn" style="font-size: 26px; padding: 15px 50px; background: var(--danger-color); border-color: var(--danger-color);">
-            💰 ЗАДОНАТИТЬ
-        </a>
-        <p style="margin-top: 10px; opacity: 0.6; font-size: 16px;">Каждый рубль идёт на новые проекты и улучшение игр</p>
-    </div>
+        <footer>
+            <div style="margin-bottom: 30px;">
+                <p style="font-size: 24px; margin-bottom: 15px;">Понравилась игра? Поддержи разработку!</p>
+                <a href="https://www.donationalerts.com/r/fakel14" target="_blank" class="btn" style="font-size: 26px; padding: 15px 50px; background: var(--danger-color); border-color: var(--danger-color);">
+                    💰 ЗАДОНАТИТЬ
+                </a>
+                <p style="margin-top: 10px; opacity: 0.6; font-size: 16px;">Каждый рубль идёт на новые проекты и улучшение игр</p>
+            </div>
 
-    <p>Разработано: <b>Fakel14</b></p>
-    <div class="socials">
-        <a href="https://t.me/Fakelo4ik" target="_blank">💬 ТГ КАНАЛ</a>
-        <a href="https://t.me/Fakel14Official" target="_blank">👤 МОЙ ТГ</a>
+            <p>Разработано: <b>Fakel14</b></p>
+            <div class="socials">
+                <a href="https://t.me/Fakelo4ik" target="_blank">💬 ТГ КАНАЛ</a>
+                <a href="https://t.me/Fakel14Official" target="_blank">👤 МОЙ ТГ</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">© 2026 DESKVENTURE. ALL RIGHTS RESERVED.</p>
+        </footer>
     </div>
-    <p style="margin-top: 20px; font-size: 14px; opacity: 0.7;">© 2026 DESKVENTURE. ALL RIGHTS RESERVED.</p>
-</footer>
 
     <script>
         // === ПЕЧАТАЮЩИЙСЯ ТЕКСТ ===
@@ -349,9 +350,8 @@
             }
         }
 
-
         // === СИСТЕМА ОТЗЫВОВ ===
-        const TELEGRAM_BOT_TOKEN = '8708232687:AAH5Taa0KgPWs2CT-cXReSE-r10LpFZa8GA'; 
+        const TELEGRAM_BOT_TOKEN = '8708232687:AAH5Taa0KgPWs2CT-cXReSE-r10LpFZa8GA';
         const TELEGRAM_CHAT_ID = 7019850371;
 
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
@@ -415,7 +415,7 @@
     <script>
         const container = document.getElementById('reviewsContainer');
         
-        if (typeof approvedReviews !== 'undefined') {
+        if (typeof approvedReviews !== 'undefined' && approvedReviews.length > 0) {
             approvedReviews.forEach((review, index) => {
                 const reviewDiv = document.createElement('div');
                 const borderColor = index % 2 === 0 ? 'var(--main-color)' : 'var(--danger-color)';
